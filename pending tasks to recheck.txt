@@ -1,0 +1,17 @@
+1. reset password in fornt end
+2. in BE also issues are there 
+4. Integrate stripe for payment not working.
+
+stripe secrete key
+
+whsec_681a281dec379f317079285f9e2ec08484cbb69dbf40bef6ccf1c5d6f40fe38b
+
+tax_rates:["txr_1PBWWwRxF4oSO88845GraXz4"]
+const shipping_rate =    body?.itemsPrice >= 200
+    ? "shr_1PBWUoRxF4oSO888VKa1ONBP"
+    : "shr_1PBWVTRxF4oSO888POq4Sau5"
+
+
+old pass in db : $2a$10$NjSSTxgFxGl2.kujdzKXueUK7lBPKEJ5vsoV6IlYIi/qNW9kATdWS
+new pass in db :
+        
