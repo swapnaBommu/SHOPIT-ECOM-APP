@@ -13,7 +13,6 @@ const Invoice = () => {
   const params = useParams();
   const { data, isLoading, error } = useOrderDetailsQuery(params?.id);
   const order = data?.order || {};
-    console.log("******************************",order)
   const { shippingInfo, orderItems, paymentInfo, user } = order;
 
   useEffect(() => {
