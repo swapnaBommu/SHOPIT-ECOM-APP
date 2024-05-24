@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Loader from "../layout/Loader";
+
 import { toast } from "react-hot-toast";
 
 import MetaData from "../layout/MetaData";
@@ -44,7 +44,7 @@ const NewProduct = () => {
     e.preventDefault();
     createProduct(product);
   };
-  if(isLoading) return <Loader />
+
   return (
     <AdminLayout>
       <MetaData title={"Create new Product"} />
@@ -160,5 +160,6 @@ const NewProduct = () => {
     </AdminLayout>
   );
 };
+
 
 export default NewProduct;

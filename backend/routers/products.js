@@ -1,5 +1,17 @@
 import express from "express";
-import { canUserReview, createProductReview, deleteProduct, deleteReview, getAdminProducts, getProductDetails, getProductReviews, getProducts, newProduct, updateProduct,uploadProductImages,deleteProductImage } from "../controllers/productController.js";
+import { canUserReview, 
+        createProductReview,
+        deleteProduct,
+        deleteReview,
+        getAdminProducts,
+        getProductDetails,
+        getProductReviews,
+        getProducts,
+        newProduct,
+        updateProduct,
+        uploadProductImages,
+        deleteProductImage
+    } from "../controllers/productController.js";
 import { isAuthentictedUser,authorizeRoles } from "../middlewares/auth.js";
 
 const router = express.Router();

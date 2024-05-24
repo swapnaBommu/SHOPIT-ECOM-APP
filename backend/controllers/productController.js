@@ -3,6 +3,8 @@ import Product from "../models/product.js"
 import ErrorHandler from "../utils/errorHandler.js";
 import APIFilters from "../utils/apiFilters.js";
 import Order from "../models/order.js";
+
+import { delete_file, upload_file } from "../utils/cloudnary.js";
 //get products => /api/v1/products
 export const getProducts = catchAsyncError( async (req,res) =>{
     const resPerPage = 4;
