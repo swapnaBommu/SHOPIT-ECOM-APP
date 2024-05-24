@@ -182,3 +182,48 @@ export const canUserReview = catchAsyncError(async (req,res, next) =>{
     });
 })
 
+// Upload product images   =>  /api/v1/admin/products/:id/upload_images
+export const uploadProductImages = catchAsyncError(async (req, res) => {
+    let product = await Product.findById(req?.params?.id);
+  
+    if (!product) {
+      return next(new ErrorHandler("Product not found", 404));
+    }
+  
+    const uploader = async (image) => upload_file(image, "shopit/products");
+  
+    const urls = await Promise.all((req?.body?.images).map(uploader));
+  
+    product?.images?.push(...urls);
+    await product?.save();
+  
+    res.status(200).json({
+      product,
+    });
+  });
+  
+  // Delete product image   =>  /api/v1/admin/products/:id/delete_image
+  export const deleteProductImage = catchAsyncError(async (req, res) => {
+    let product = await Product.findById(req?.params?.id);
+  
+    if (!product) {
+      return next(new ErrorHandler("Product not found", 404));
+    }
+  
+    const isDeleted = await delete_file(req.body.imgId);
+  
+    if (isDeleted) {
+      product.images = product?.images?.filter(
+        (img) => img.public_id !== req.body.imgId
+      );
+  
+      await product?.save();
+    }
+  
+    res.status(200).json({
+      product,
+    });
+  });
+  
+  
+
