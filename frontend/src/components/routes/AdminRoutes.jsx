@@ -8,6 +8,8 @@ import UpdateProduct from '../admin/UpdateProduct';
 import ListOrders from '../admin/ListOrders';
 import ProcessOrder from '../admin/ProcessOrder';
 import ListUsers from '../admin/ListUsers';
+import UpdateUser from '../admin/UpdateUser';
+import ProductReviews from '../admin/ProductReviews';
 import UploadImages from '../admin/UploadImages';
 const AdminRoutes = () => {
   return (
@@ -72,7 +74,22 @@ const AdminRoutes = () => {
         } 
     />
 
-        
+    <Route
+        path="/admin/users/:id"
+        element={
+          <ProtectedRoute admin={true}>
+            <UpdateUser />
+          </ProtectedRoute>
+        }
+    />
+    <Route
+        path="/admin/reviews"
+        element={
+          <ProtectedRoute admin={true}>
+            <ProductReviews />
+          </ProtectedRoute>
+        }
+    />
     </>
   )
 }

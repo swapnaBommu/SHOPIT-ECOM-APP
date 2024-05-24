@@ -206,7 +206,7 @@ export const updateUser = catchAsyncErrors(async (req, res, next) =>{
         email:req.body.email,
         role:req.body.role
     }
-    const user = await User.findByIdAndUpdate(req.user._id, newUserData,{new : true})
+    const user = await User.findByIdAndUpdate(req.params.id, newUserData,{new : true})
     res.status(200).json({
        success:true,
        user
@@ -222,6 +222,9 @@ export const deleteUser = catchAsyncErrors(async (req, res, next) =>{
         return next(new ErrorHandler(`User not found with this id:${req.params.id}`,404));
     }
     //TODO - Remove user avatar from cloudnary
+    if (user?.avatar?.public_id) {
+        await delete_file(user?.avatar?.public_id);
+    }
     await user.deleteOne();
     
     res.status(200).json({

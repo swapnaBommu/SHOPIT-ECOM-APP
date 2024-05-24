@@ -7,7 +7,7 @@ export const productApi = createApi({
     baseQuery:fetchBaseQuery({baseUrl: "/api/v1"}),
     // define our endpoints, here we are fetching data we should use query function
     //query: An endpoint definition that retrieves data
-    tagTypes:["Product", "AdminProducts"],
+    tagTypes:["Product", "AdminProducts", "Reviews"],
     endpoints:(builder) => ({
         getProducts : builder.query({
             query: (params) =>({
