@@ -9,6 +9,7 @@ import { setCartItem } from '../../redux/features/cartSlice';
 import MetaData from '../layout/MetaData';
 import NewReview from '../reviews/NewReview';
 import ListReviews from '../reviews/ListReviews';
+import NotFound from '../layout/NotFound';
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
@@ -58,16 +59,25 @@ const ProductDetails = () => {
 
     //Handle cart item
     const setItemToCart = () => {
-      const cartItem = {
-        product:product?._id,
-        name:product?.name,
-        price:product?.price,  
-        image:product?.images[0]?.url,
-        stock:product?.stock,
-        quantity
-      };
-      dispatch(setCartItem(cartItem));
-      toast.success("Item added to cart"); 
+      if(isAuthenticated){
+        const cartItem = {
+          product:product?._id,
+          name:product?.name,
+          price:product?.price,  
+          image:product?.images[0]?.url,
+          stock:product?.stock,
+          quantity
+        };
+        dispatch(setCartItem(cartItem));
+        toast.success("Item added to cart"); 
+      }else{
+        toast.error("Login to add the product to cart");
+      }
+      
+    }
+    if(error && error?.status==404){
+        return <NotFound />
+
     }
 
     if(isLoading) return <Loader />

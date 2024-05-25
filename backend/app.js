@@ -7,9 +7,12 @@ import productRoutes from "./routers/products.js";
 import authRoutes from "./routers/auth.js";
 import orderRoutes from "./routers/order.js";
 import paymentRoutes from "./routers/payment.js";
-
+import path from 'path';
+import { fileURLToPath } from 'url';
 const app = express()
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename);
 //Handle uncaught exception
 process.on('uncaughtException', (err) =>{
     console.log(`ERROR: ${err}`);
@@ -36,6 +39,13 @@ app.use("/api/v1", authRoutes);
 app.use("/api/v1", orderRoutes)
 app.use("/api/v1", paymentRoutes);
 
+if(process.env.NODE_ENV === 'PRODUCTION'){
+    app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+    app.get('*', (req, res) =>{
+        res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"))
+    })
+}
 //using error middleware
 app.use(errorMiddleware);
 const server = app.listen(process.env.PORT,()=>{
